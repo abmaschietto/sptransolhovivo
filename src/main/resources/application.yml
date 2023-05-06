@@ -1,0 +1,10 @@
+
+token:
+  sptrans: ${SPTRANSTOKEN}
+
+logging:
+  level:
+    com:
+      artucrop:
+        sptrans:
+          integration: DEBUG
