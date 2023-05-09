@@ -2,6 +2,7 @@ package com.artucrop.sptrans.service;
 
 import com.artucrop.sptrans.integration.SpTransClient;
 import com.artucrop.sptrans.models.BusLine;
+import com.artucrop.sptrans.models.BusPositionAndTime;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
@@ -10,19 +11,27 @@ import java.util.Arrays;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 class SpTransServiceTest {
 
+    SpTransClient spTransClientMock = Mockito.mock(SpTransClient.class);
+    SpTransService spTransService = new SpTransService(spTransClientMock);
+
     @Test
     void getBusLines(){
-        var spTransClientMock = Mockito.mock(SpTransClient.class);
-        var spTransService = new SpTransService(spTransClientMock);
-
-        when(spTransClientMock.getBuses("Damasceno")).thenReturn(Arrays.asList(new BusLine()));
-        var busLines = spTransService.getBusLines("Damasceno");
+        when(spTransClientMock.getBuses(any())).thenReturn(Arrays.asList(new BusLine()));
+        var busLines = spTransService.getBusByLineID("971D");
 
         assertThat(busLines.isEmpty(), is(false));
     }
+
+
+    @Test
+    void getBusTimeToArrive(){
+        BusPositionAndTime busPositionAndTime = spTransService.getTimeToArrive("2499");
+
+        assertThat(busPositionAndTime.getHoraInfoGerada(), is("00:00"));
+    }
+
 }
