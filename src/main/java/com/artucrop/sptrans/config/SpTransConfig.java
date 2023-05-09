@@ -4,7 +4,6 @@ package com.artucrop.sptrans.config;
 import feign.RequestInterceptor;
 import lombok.extern.slf4j.Slf4j;
 import okhttp3.*;
-import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 
@@ -33,8 +32,7 @@ public class SpTransConfig {
     }
     private void createCookieForRequest() {
         Request preRequest = createRequest();
-        OkHttpClient client = new OkHttpClient();
-        try (Response response = client.newCall(preRequest).execute()) {
+        try (Response response = httpClient.newCall(preRequest).execute()) {
             if (response.isSuccessful()) {
                 extractCookie(response);
             }
@@ -53,6 +51,4 @@ public class SpTransConfig {
                 .post(RequestBody.create(MEDIA_TYPE, ""))
                 .build();
     }
-
-
 }
