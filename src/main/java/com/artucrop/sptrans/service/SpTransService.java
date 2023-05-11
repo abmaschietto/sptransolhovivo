@@ -26,7 +26,7 @@ public class SpTransService implements BusService{
     }
 
 
-    public BusPositionAndTime getTimeToArrive(String number) {
-        return null;
+    public BusPositionAndTime getTimeToArrive(String linha) {
+        return spTransClient.getBusPosition(linha);
     }
 }

@@ -1,5 +1,6 @@
 package com.artucrop.sptrans.service;
 
+import com.artucrop.sptrans.fixture.BusFixture;
 import com.artucrop.sptrans.integration.SpTransClient;
 import com.artucrop.sptrans.models.BusLine;
 import com.artucrop.sptrans.models.BusPositionAndTime;
@@ -29,9 +30,10 @@ class SpTransServiceTest {
 
     @Test
     void getBusTimeToArrive(){
+        when(spTransClientMock.getBusPosition("2499")).thenReturn(BusFixture.createBusPositionAndTime());
         BusPositionAndTime busPositionAndTime = spTransService.getTimeToArrive("2499");
 
-        assertThat(busPositionAndTime.getHoraInfoGerada(), is("00:00"));
+        assertThat(busPositionAndTime.getHoraInfoGerada(), is("21:30"));
     }
 
 }

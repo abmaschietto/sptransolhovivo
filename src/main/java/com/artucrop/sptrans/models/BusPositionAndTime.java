@@ -1,11 +1,13 @@
 package com.artucrop.sptrans.models;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Builder;
 import lombok.Data;
 
 import java.util.List;
 
 @Data
+@Builder
 public class BusPositionAndTime {
 
     @JsonProperty("hr")
@@ -13,14 +15,6 @@ public class BusPositionAndTime {
     @JsonProperty("vs")
     public List<Buses> buses;
 
-    @Data
-    class Buses {
-        @JsonProperty("p")
-        public String prefixoVeiculo;
-        @JsonProperty("py")
-        public double posicaoY;
-        @JsonProperty("px")
-        public double posicaoX;
-    }
+
 
 }

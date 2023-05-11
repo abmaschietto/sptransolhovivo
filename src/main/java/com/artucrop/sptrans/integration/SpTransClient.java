@@ -2,10 +2,10 @@ package com.artucrop.sptrans.integration;
 
 import com.artucrop.sptrans.config.SpTransConfig;
 import com.artucrop.sptrans.models.BusLine;
+import com.artucrop.sptrans.models.BusPositionAndTime;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
@@ -17,4 +17,6 @@ public interface SpTransClient {
     @GetMapping(value = "/Linha/Buscar")
     List<BusLine> getBuses(@RequestParam("termosBusca") String termosBusca);
 
+    @GetMapping(value = "/Posicao/Linha")
+    BusPositionAndTime getBusPosition(@RequestParam("codigoLinha") String linha);
 }
